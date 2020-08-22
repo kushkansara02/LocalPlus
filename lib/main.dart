@@ -7,32 +7,10 @@ void main() {
   );
 }
 
-/// This Widget is the main application widget.
-class MyApp extends StatelessWidget {
-  static const String _title = 'App';
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: _title,
-      home: MyStatefulWidget(),
-    );
-  }
-}
-
-class MyStatefulWidget extends StatefulWidget {
-  MyStatefulWidget({Key key}) : super(key: key);
-
-  @override
-  _MyStatefulWidgetState createState() => _MyStatefulWidgetState();
-}
-
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  int _selectedIndex = 0;
-  static const TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  int b_width = 200;
-  static List<Widget> _widgetOptions = <Widget>[
-    Column(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         Container(
@@ -118,8 +96,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           height: 50,
         ),
       ],
-    ),
-    Column(
+    );
+  }
+}
+
+class SearchPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
       children: <Widget>[
         SizedBox(
           height: 50,
@@ -221,22 +205,94 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           height: 50,
         ),
       ],
-    ),
-    Text('Cart'),
-    Text(
-      'Routes',
-      style: optionStyle,
-    ),
-    Text(
-      'Settings',
-      style: optionStyle,
-    ),
-  ];
+    );
+  }
+}
 
-  void _onItemTapped(int index) {
+class CartPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Text('Cart');
+  }
+}
+
+class RoutePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Text('Routes');
+  }
+}
+
+class SettingsPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Text('Settings');
+  }
+}
+
+/// This Widget is the main application widget.
+class MyApp extends StatelessWidget {
+  static const String _title = 'App';
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: _title,
+      home: MyStatefulWidget(),
+    );
+  }
+}
+
+class MyStatefulWidget extends StatefulWidget {
+  MyStatefulWidget({Key key}) : super(key: key);
+
+  @override
+  _MyStatefulWidgetState createState() => _MyStatefulWidgetState();
+}
+
+class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  int _selectedIndex = 0;
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  int b_width = 200;
+
+  void onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
+  }
+
+  Widget getWidget(int index) {
+    switch (index) {
+      case 0:
+        {
+          return HomePage();
+        }
+        break;
+
+      case 1:
+        {
+          return SearchPage();
+        }
+        break;
+
+      case 2:
+        {
+          return CartPage();
+        }
+        break;
+
+      case 3:
+        {
+          return RoutePage();
+        }
+        break;
+
+      case 4:
+        {
+          return SettingsPage();
+        }
+        break;
+    }
   }
 
   @override
@@ -252,7 +308,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         ),
       ),
       body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
+        child: getWidget(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
@@ -281,7 +337,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         ],
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.blue,
-        onTap: _onItemTapped,
+        onTap: onItemTapped,
       ),
     );
   }
