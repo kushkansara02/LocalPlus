@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import './home-page.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(
+    MyApp(),
+  );
+}
 
 /// This Widget is the main application widget.
 class MyApp extends StatelessWidget {
@@ -26,6 +30,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
+  int b_width = 200;
   static List<Widget> _widgetOptions = <Widget>[
     Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -114,7 +119,109 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         ),
       ],
     ),
-    Text('Search'),
+    Column(
+      children: <Widget>[
+        SizedBox(
+          height: 50,
+        ),
+        Expanded(
+          child: RaisedButton(
+            child: Container(
+              width: 200,
+              child: Center(
+                child: Text(
+                  'Fruits and Vegetables',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 50,
+        ),
+        Expanded(
+          child: RaisedButton(
+            child: Container(
+              width: 200,
+              child: Center(
+                child: Text(
+                  'Dairy and Eggs',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 50,
+        ),
+        Expanded(
+          child: RaisedButton(
+            child: Container(
+              width: 200,
+              child: Center(
+                child: Text(
+                  'Meat and Seafood',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 50,
+        ),
+        Expanded(
+          child: RaisedButton(
+            child: Container(
+              width: 200,
+              child: Center(
+                child: Text(
+                  'Bakery',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 50,
+        ),
+        Expanded(
+          child: RaisedButton(
+            child: Container(
+              width: 200,
+              child: Center(
+                child: Text(
+                  'Drinks',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 50,
+        ),
+        Expanded(
+          child: RaisedButton(
+            child: Container(
+              width: 200,
+              child: Center(
+                child: Text(
+                  'Snacks',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 50,
+        ),
+      ],
+    ),
     Text('Cart'),
     Text(
       'Routes',
