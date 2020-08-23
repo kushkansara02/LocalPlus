@@ -9,11 +9,16 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.yellow[100],
-      appBar: topAppBar("Local Plus"),
+      backgroundColor: Colors.lightBlue,
+      appBar: topAppBar("Local+"),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          Image.asset(
+            'images/logo.png',
+            width: 150,
+            height: 150,
+          ),
           Container(
             width: double.infinity,
             child: Card(
@@ -21,7 +26,7 @@ class HomePage extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Center(
                   child: Text(
-                    'Welcome, Ad00t!',
+                    'Welcome, Hack the 6ix User!',
                     style: TextStyle(
                       fontFamily: 'Montserrat',
                       fontWeight: FontWeight.bold,
@@ -30,73 +35,6 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Container(
-            width: double.infinity,
-            child: Card(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Your current location is:',
-                  style: TextStyle(
-                      fontFamily: 'Montserrat', fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Container(
-            width: double.infinity,
-            child: Card(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'You currently have X items selected in Y shopping lists',
-                  style: TextStyle(
-                      fontFamily: 'Montserrat', fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Container(
-            width: double.infinity,
-            child: Card(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Your most recent list would take you to N stores within an M km radius',
-                  style: TextStyle(
-                      fontFamily: 'Montserrat', fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Container(
-            width: double.infinity,
-            child: Card(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  'Info (Expand)',
-                  style: TextStyle(
-                      fontFamily: 'Montserrat', fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 50,
           ),
         ],
       ),
@@ -110,7 +48,7 @@ class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.yellow[100],
+      backgroundColor: Colors.lightBlue,
       body: Container(
         child: Center(
           child: Column(
@@ -167,15 +105,6 @@ class SearchPage extends StatelessWidget {
       child: RaisedButton(
         onPressed: () => _openDetailsPage(context, title),
         child: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: <Color>[
-                Color(0xFF0D47A1),
-                Color(0xFF1976D2),
-                Color(0xFF42A5F5),
-              ],
-            ),
-          ),
           width: b_width,
           child: Center(
             child: Text(
@@ -239,17 +168,28 @@ class _CartPageState extends State<CartPage> {
   void compileList() {
     List<Widget> finalList = <Widget>[];
     for (int x = 0; x < allLists.length; x++) {
-      finalList.add(Container(
-        width: 200,
-        child: RaisedButton(
-          child: Text(allLists[x]),
-          onPressed: () {},
-        ),
-      ));
+      finalList.add(productButton(context, allLists[x]));
     }
     setState(() {
       mainList = finalList;
     });
+  }
+
+  Widget productButton(BuildContext context, String title) {
+    return Container(
+      child: RaisedButton(
+        onPressed: () => _openDetailsPage(context, title),
+        child: Container(
+          width: 200,
+          child: Center(
+            child: Text(
+              title,
+              style: TextStyle(fontFamily: 'Montserrat'),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 
   void postList(String listName) async {
@@ -265,9 +205,11 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     if (!dataGotten) {
       fetchData();
+      compileList();
       dataGotten = true;
     }
     return Scaffold(
+      backgroundColor: Colors.lightBlue,
       appBar: topAppBar('Your Grocery Lists'),
       body: Column(
         children: [
@@ -317,6 +259,12 @@ class _CartPageState extends State<CartPage> {
         ],
       ),
     );
+  }
+
+  _openDetailsPage(BuildContext context, String category) {
+    print(category);
+    Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => ShowGroceryList(category)));
   }
 }
 
