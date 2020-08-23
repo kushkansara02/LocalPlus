@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hack_the_6ix/maps.dart';
 import './pages.dart';
 import './main.dart';
 import 'dart:io';
@@ -166,15 +167,15 @@ class _ShowGroceryListState extends State<ShowGroceryList> {
 
   _openDetailsPage(BuildContext context, String category) {
     print(category);
-    Navigator.of(context).push(
-        MaterialPageRoute(builder: (context) => ShowGroceryList(category)));
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => MyApp()));
   }
 
   Widget productButton(BuildContext context, String title) {
     return Expanded(
       child: Container(
         child: RaisedButton(
-          onPressed: () => _openDetailsPage(context, title),
+          onPressed: () {},
           child: Container(
             width: 200,
             child: Center(
@@ -208,7 +209,7 @@ class _ShowGroceryListState extends State<ShowGroceryList> {
                   child: Padding(
                     padding: const EdgeInsets.all(16),
                     child: Text(
-                        'Below are the items in your grocery list. These are two route options you can choose from'),
+                        'Below are the items in your grocery list. These are three route options you can choose from'),
                   ),
                   color: Colors.grey,
                 ),

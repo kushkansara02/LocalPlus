@@ -1,5 +1,6 @@
 import 'package:custom_navigator/custom_navigation.dart';
 import 'package:flutter/material.dart';
+import 'package:hack_the_6ix/maps.dart';
 import 'package:hack_the_6ix/products.dart';
 import './pages.dart';
 import 'package:custom_navigator/custom_navigator.dart';
@@ -34,7 +35,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         HomePage(),
         SearchPage(),
         CartPage(),
-        RoutePage(),
+        MyApp(),
       ],
       onItemTap: (index) {},
     );

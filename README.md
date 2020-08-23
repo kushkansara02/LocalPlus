@@ -1,6 +1,24 @@
-# hack_the_6ix
+## Inspiration
+The Canadian economy has taken a tumble since the outbreak of COVID-19 in early March of this year. While these circumstances have affected all businesses from operating and staying open, local businesses have been the most affected. 
 
-This is our Hack the 6ix Project!
+Roughly **four in five Canadians** are worried that their favourite local businesses will shut down as a result of the COVID-19 pandemic as found in a poll conducted by the Canadian Federation of Independent Business (CFIB) in mid-August 2020. The poll also concluded that roughly **158,000 small businesses will close by the end of the pandemic** as the business owners face lower sales, regulations on location capacity, and increased spending on personal protective equipment. Statistics Canada found that small businesses were more likely to report revenues from their **first quarter in 2020 were down by 20% from their first quarter 2019** when compared to businesses with more than 100 employees. Closer to home, Charlie Lin, owner of the Sky Dragon Restaurant in Toronto stated, “This virus really hurt our business. It cut down our business almost 50% to 60%.” 
 
-## Overview
+It is evident that local businesses need support from their community in order to make it through these circumstances. 95% of Canadians feel that supporting local businesses is the key to keeping the economy healthy as per the poll from the CFIB, and we decided to make it easier by creating a mobile application to benefit the local businesses we depend on.
 
+## What it does
+_Local+_ is a mobile application that can be used by Canadians to support our local businesses. Our expected features included the ability for users to search for common grocery items using the catalogue feature and add them to a grocery list. Then, users can select which of their created lists they wish to shop for and choose between the quickest route, the route with the cheapest products, or the route with most products from their selected list in one store. From here, users are given an optimized route through a Google Maps API to take to get to these store locations and shop! Unfortunately, we were unable to fully accomplish the feature to create a list or map out the routes desired using Google Maps.
+
+## How we built it
+_Local+_ is built in the Flutter Framework using Dart. The backend utilizes AutoCode for Airtable APIs, Google Maps API, and a Geolocator API for features such as searching available products, creating your grocery list, and mapping a route to pick up all the items on your list.
+
+## Challenges we ran into
+One of the major challenges we faced was implementing the Google Maps API. It was difficult because we had a hard time incorporating aspects of the open-source Google Maps Widget into our application in a way that would work seamlessly within our application. Additionally, we only had a little knowledge of Dart prior to the hackathon, which led to a lot of syntax-related learning to resolve several bugs. Lastly, we were not able to fully execute all of our initial planned features so we had to work around that to find alternatives. 
+
+## Accomplishments that we are proud of
+Looking at our challenges is a perfect lead into our most notable accomplishments, which starts with the completion of our application. There were several bugs that we faced while creating the app, so we were very proud once almost everything came together at the end. Additionally, the Airtable databases worked exactly as we needed, which further enhanced the capabilities of our application._Local+_ is the first project we have completed that makes use of these features and capabilities, and we are truly proud of the final product.
+
+## What we learned
+Without a doubt, we learned a tremendous amount about app development in Flutter and its API integration. This allowed us to create a functional application with references to backend Airtable databases and Google Maps, both APIs we had no prior experience within any language. We also learned the importance of planning after we brainstormed many ideas at the beginning but did not know how to move forward. Taking the time to make a rough schedule helped everyone stay on track towards our set goals and deadlines.
+
+## What's next for _Local+_
+_Local+_ currently does not have access to the inventory of nearby local businesses including information about what products are available and their price. The next steps for _Local+_ include establishing a method to fetch data from the store’s inventory and link it securely to the app. This way, users have real-time data about the businesses near them. We also want to allow users to create their unique lists and add to them as necessary, then calculate the route options.
