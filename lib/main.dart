@@ -14,9 +14,7 @@ void main() {
 }
 
 class MyStatefulWidget extends StatefulWidget {
-  MyStatefulWidget({Key key, this.title}) : super(key: key);
-
-  final String title;
+  MyStatefulWidget({Key key}) : super(key: key);
 
   @override
   _MyStatefulWidgetState createState() => _MyStatefulWidgetState();

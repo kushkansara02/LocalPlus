@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import './products.dart';
 import './main.dart';
+import 'dart:io';
+import 'dart:convert';
 
 List<String> allLists = <String>[];
 
@@ -149,6 +151,10 @@ class SearchPage extends StatelessWidget {
               SizedBox(
                 height: b_height,
               ),
+              productButton(context, 'Vegetables'),
+              SizedBox(
+                height: b_height,
+              ),
             ],
           ),
         ),
@@ -189,7 +195,7 @@ class SearchPage extends StatelessWidget {
       case 'Bakery':
         {
           Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => BakeryProducts()));
+              .push(MaterialPageRoute(builder: (context) => ShowProducts()));
         }
         break;
 
@@ -258,9 +264,40 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
-  List<Widget> mainList = <Widget>[Text('Submit a list to see your lists!')];
+  List<Widget> tempData = [];
+  List<Widget> mainList = <Widget>[Text('Your data is loading')];
+  bool dataGotten = false;
+
   final _formKey = GlobalKey<FormState>();
   TextEditingController listController = TextEditingController();
+
+  void fetchData() async {
+    final client = HttpClient();
+    final request = await client.getUrl(
+        Uri.parse('https://josh-jo1.api.stdlib.com/view-cart-names@dev/'));
+    final response = await request.close();
+    final contentAsString = await utf8.decodeStream(response);
+    final map = json.decode(contentAsString);
+    for (int x = 0; x < map.length; x++) {
+      tempData.add(
+        Container(
+          width: 200,
+          child: RaisedButton(
+            child: Text(map[x]),
+            onPressed: () {},
+          ),
+        ),
+      );
+      allLists.add(map[x]);
+    }
+    setState(() {
+      if (tempData.length > 0) {
+        mainList = tempData;
+      } else {
+        mainList.add(Text('You have no lists currently created'));
+      }
+    });
+  }
 
   void compileList() {
     List<Widget> finalList = <Widget>[];
@@ -278,8 +315,18 @@ class _CartPageState extends State<CartPage> {
     });
   }
 
+  void postList(String listName) async {
+    final client = HttpClient();
+    final request = await client.getUrl(Uri.parse(
+        'https://josh-jo1.api.stdlib.com/cart-names@dev/?list=$listName'));
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (!dataGotten) {
+      fetchData();
+      dataGotten = true;
+    }
     return Scaffold(
       appBar: topAppBar('Your Grocery Lists'),
       body: Column(
@@ -311,7 +358,9 @@ class _CartPageState extends State<CartPage> {
                           _formKey.currentState.save();
 
                           if (allLists.length < 9) {
-                            allLists.add(listController.text);
+                            String listName = listController.text;
+                            allLists.add(listName);
+                            postList(listName);
                             compileList();
                           }
                         }
@@ -355,3 +404,8 @@ Widget topAppBar(String Title) {
     ),
   );
 }
+
+// https://josh-jo1.api.stdlib.com/cart-items@dev/?item=Chicken&list=myList, adding product to database
+// https://josh-jo1.api.stdlib.com/view-cart-items@dev/?list=myList, view items in a list
+// https://josh-jo1.api.stdlib.com/cart-names@dev/?list=mylist, add list???
+// https://josh-jo1.api.stdlib.com/view-cart-names@dev/, return all lists created by user
