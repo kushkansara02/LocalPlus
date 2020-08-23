@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import './products.dart';
-import './main.dart';
 import 'dart:io';
 import 'dart:convert';
 
@@ -11,7 +10,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.yellow[100],
-      appBar: topAppBar("We don't have one"),
+      appBar: topAppBar("Local Plus"),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -191,70 +190,8 @@ class SearchPage extends StatelessWidget {
 
   //Use the navigator like you usually do with .of(context) method
   _openDetailsPage(BuildContext context, String category) {
-    switch (category) {
-      case 'Bakery':
-        {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => ShowProducts()));
-        }
-        break;
-
-      case 'Dairy':
-        {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => DairyProducts()));
-        }
-        break;
-
-      case 'Drinks':
-        {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => DrinksProducts()));
-        }
-        break;
-
-      case 'Eggs':
-        {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => EggsProducts()));
-        }
-        break;
-
-      case 'Fruits':
-        {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => FruitsProducts()));
-        }
-        break;
-
-      case 'Meat':
-        {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => MeatProducts()));
-        }
-        break;
-
-      case 'Seafood':
-        {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => SeafoodProducts()));
-        }
-        break;
-
-      case 'Snacks':
-        {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => SnacksProducts()));
-        }
-        break;
-
-      case 'Vegetables':
-        {
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => VegetablesProducts()));
-        }
-        break;
-    }
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => ShowProducts(category)));
   }
 }
 
@@ -294,7 +231,7 @@ class _CartPageState extends State<CartPage> {
       if (tempData.length > 0) {
         mainList = tempData;
       } else {
-        mainList.add(Text('You have no lists currently created'));
+        mainList[0] = Text('You have no lists currently created');
       }
     });
   }
@@ -319,6 +256,9 @@ class _CartPageState extends State<CartPage> {
     final client = HttpClient();
     final request = await client.getUrl(Uri.parse(
         'https://josh-jo1.api.stdlib.com/cart-names@dev/?list=$listName'));
+    final response = await request.close();
+    final contentAsString = await utf8.decodeStream(response);
+    final map = json.decode(contentAsString);
   }
 
   @override
@@ -358,9 +298,8 @@ class _CartPageState extends State<CartPage> {
                           _formKey.currentState.save();
 
                           if (allLists.length < 9) {
-                            String listName = listController.text;
-                            allLists.add(listName);
-                            postList(listName);
+                            allLists.add(listController.text);
+                            postList(listController.text);
                             compileList();
                           }
                         }
@@ -385,13 +324,6 @@ class RoutePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text('Routes');
-  }
-}
-
-class SettingsPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Text('Settings');
   }
 }
 

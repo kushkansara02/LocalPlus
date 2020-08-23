@@ -14,8 +14,6 @@ void main() {
 }
 
 class MyStatefulWidget extends StatefulWidget {
-  MyStatefulWidget({Key key}) : super(key: key);
-
   @override
   _MyStatefulWidgetState createState() => _MyStatefulWidgetState();
 }
@@ -37,7 +35,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         SearchPage(),
         CartPage(),
         RoutePage(),
-        SettingsPage(),
       ],
       onItemTap: (index) {},
     );
@@ -81,16 +78,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       ),
       title: Text(
         'Routes',
-        style: TextStyle(color: Colors.black),
-      ),
-    ),
-    BottomNavigationBarItem(
-      icon: Icon(
-        Icons.settings,
-        color: Colors.black,
-      ),
-      title: Text(
-        'Settings',
         style: TextStyle(color: Colors.black),
       ),
     ),
